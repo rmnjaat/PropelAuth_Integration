@@ -1,9 +1,9 @@
 
 from abc import abstractmethod
-from Service.base_service import BaseService
+from Repository.base_repository import BaseRepository
 from Models.auth import LogoutResponse
 
-class auth_service(BaseService):
+class auth_repository(BaseRepository):
     @abstractmethod
     def logout(self, user_id: str) -> LogoutResponse:
         pass

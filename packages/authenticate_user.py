@@ -21,10 +21,10 @@ class AuthenticateUser:
         if not auth_header:
             raise HTTPException(status_code=401, detail="Unauthorized")
         
-        # try:
-        user = self.auth_provider.verify_token(auth_header)
-        # except Exception as e:
-        #     raise HTTPException(status_code=401, detail="Unauthorized")
+        try:
+            user = self.auth_provider.verify_token(auth_header)
+        except Exception as e:
+            raise HTTPException(status_code=401, detail="Unauthorized")
 
         self.request_context.set_user(request, user)
 

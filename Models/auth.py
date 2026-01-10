@@ -1,7 +1,6 @@
 
-from pydantic.main import BaseModel
+from pydantic import BaseModel
 
-class LoginRequest(BaseModel):
-    email: str
-    password: str
-
+class LogoutResponse(BaseModel):
+    message: str
+    status: int

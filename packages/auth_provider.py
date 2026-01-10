@@ -11,8 +11,6 @@ class Auth_provider():
             cls._instance = super(Auth_provider, cls).__new__(cls)
             cls._instance.auth_url = os.getenv("AUTH_URL")
             cls._instance.auth_key = os.getenv("AUTH_KEY")
-            print(cls._instance.auth_url)
-            print(cls._instance.auth_key)
             cls._instance.auth_v2 = init_base_auth(
                 cls._instance.auth_url,
                 cls._instance.auth_key

@@ -1,11 +1,10 @@
 
-from Models.auth import LoginRequest
-from Service.auth_service import AuthService
+from Models.auth import LogoutResponse
+from Repository.auth_repository import auth_repository
+from Service.auth_service import auth_service
 
+class auth_service_handler(auth_service):
+    repository: auth_repository
 
-class AuthServiceHandler(AuthService):
-    def login(self,request: LoginRequest):
-        return {"message": "Login"}
-
-    def logout(self,request: LoginRequest):
-        return {"message": "Logout"}
+    def logout(self, user_id: str) -> LogoutResponse:
+        return self.repository.logout(user_id)

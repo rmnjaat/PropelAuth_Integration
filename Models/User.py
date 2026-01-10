@@ -40,6 +40,8 @@ class updateUserRequest(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     email: Optional[str] = None
+    role: Optional[Roles] = None
+    orgId: Optional[str] = None
 
 class updateUserResponse(BaseResponse):
     pass
