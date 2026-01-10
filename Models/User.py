@@ -1,20 +1,23 @@
 
 from datetime import datetime
 from enum import Enum
+from typing import Optional
 from pydantic import BaseModel
 
-class Roles(str ,Enum):
-    ADMIN = "ADMIN"
-    USER = "USER"
-    MEMBER="MEMBER"
+class Roles(str, Enum):
+    OWNER = "Owner"
+    ADMIN = "Admin"
+    MEMBER = "Member"
 
 
 
 class User(BaseModel):
-    name: str
+    first_name: str
+    last_name: str
     email: str
     password: str 
     role: Roles
+    orgId:str
 
 class Complete_user(User):
     id: str
@@ -32,4 +35,15 @@ class createUserRequest(BaseModel):
 
 class createUserResponse(BaseResponse):
     user_id: str 
+
+class updateUserRequest(BaseModel):
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[str] = None
+
+class updateUserResponse(BaseResponse):
+    pass
+
+class deleteUserResponse(BaseResponse):
+    pass
     
