@@ -1,15 +1,27 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, Security
 import uvicorn
-from Controller.user_managment import router
+
+from packages.authenticate_user import AuthenticateUser
+from router import router
+from Controller.auth import router as auth_router
+
 app = FastAPI()
 
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
 
+app.include_router(
+    auth_router
+)
 
 app.include_router(
-    router
+    router,
+    dependencies=[
+        Security(
+            AuthenticateUser().authenticate_user
+        )
+    ]
 )
 
 if __name__ == "__main__":

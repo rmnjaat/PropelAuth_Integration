@@ -13,7 +13,7 @@ router = APIRouter(
 def get_user_managment_service() -> user_managment_service:
     return get_instance(user_managment_service)
 
-@router.post("/health")
+@router.get("/health")
 def health_check():
     return {"message": "User Management Service is running"}
 
