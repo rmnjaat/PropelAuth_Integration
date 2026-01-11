@@ -153,10 +153,21 @@ The system is built to handle complex user operations beyond simple login:
 ### 4. Dependency Injection
 All PropelAuth-related services are injected using the `injector` library, keeping the logic decoupled from the web framework. This allows you to easily swap the `auth_provider` or repository handlers for testing.
 
-## 📅 Coming SOON
+## � SSO and Magic Links
 
-- [ ] **Google-based Authentication**: Social login integration.
-- [ ] **Single Sign-On (SSO)**: Support for enterprise-level SSO.
+A major advantage of using PropelAuth is that advanced authentication methods like **Single Sign-On (SSO)** and **Magic Links** are handled entirely by PropelAuth's hosted pages.
 
+- **Zero Backend Action Required**: You do not need to implement any additional logic in the FastAPI backend for SAML, OIDC, or Magic Link email delivery.
+- **Unified Verification**: Regardless of how the user authenticates (Social SSO, Enterprise SSO, or Magic Link), the backend receives a standard JWT. The `AuthenticateUser` class in this project validates these tokens uniformly, making your backend "auth-method agnostic."
 
+## 🏁 Conclusion
 
+This integration demonstrates how to build a secure, scalable backend by offloading the complexities of identity management to PropelAuth. By following this architecture:
+- Your core logic remains clean and focused on business value.
+- Security is handled using industry-standard JWT validation.
+- Advanced features like RBAC and SSO are "turned on" via configuration rather than complex coding.
+
+This project is intended to help developers move faster by providing a robust foundation for modern SaaS authentication.
+
+---
+*Developed with ❤️ to simplify FastAPI Authentication.*
