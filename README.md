@@ -57,14 +57,71 @@ The API will be available at `http://localhost:8000`.
 
 ## 📡 API Endpoints
 
-### Authentication
-- `POST /auth/logout`: Invalidate the current session (Requires `X-AUTH-TOKEN` header).
+| Category | Endpoint | Method | Description | Auth Required |
+|----------|----------|--------|-------------|---------------|
+| Root | `/` | GET | Welcome message | No |
+| User | `/user/health` | GET | Check service health | Yes |
+| User | `/user/create` | POST | Create a new user | Yes |
+| User | `/user/{user_id}` | PUT | Update user details | Yes |
+| User | `/user/{user_id}` | DELETE | Delete a user | Yes |
+| Auth | `/auth/logout` | POST | Logout user sessions | Yes |
 
-### User Management
-- `GET /user/health`: Check the status of the user management service.
-- `POST /user/create`: Create a new user in PropelAuth.
-- `PUT /user/{user_id}`: Update existing user details (e.g., role, properties).
-- `DELETE /user/{user_id}`: Remove a user from the system.
+---
+
+## 💻 Usage Examples (cURL)
+
+Replace `<YOUR_ACCESS_TOKEN>` with a valid PropelAuth access token and `<USER_ID>` with the actual user ID.
+
+### 1. Root Endpoint
+```bash
+curl -X GET http://localhost:8000/
+```
+
+### 2. User Health Check
+```bash
+curl -X GET http://localhost:8000/user/health \
+  -H "X-AUTH-TOKEN: <YOUR_ACCESS_TOKEN>"
+```
+
+### 3. Create User
+```bash
+curl -X POST http://localhost:8000/user/create \
+  -H "X-AUTH-TOKEN: <YOUR_ACCESS_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john.doe@example.com",
+      "password": "securepassword123",
+      "role": "Member",
+      "orgId": "your-org-id"
+    }
+  }'
+```
+
+### 4. Update User
+```bash
+curl -X PUT http://localhost:8000/user/<USER_ID> \
+  -H "X-AUTH-TOKEN: <YOUR_ACCESS_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "first_name": "Jane",
+    "role": "Admin"
+  }'
+```
+
+### 5. Delete User
+```bash
+curl -X DELETE http://localhost:8000/user/<USER_ID> \
+  -H "X-AUTH-TOKEN: <YOUR_ACCESS_TOKEN>"
+```
+
+### 6. Logout
+```bash
+curl -X POST http://localhost:8000/auth/logout \
+  -H "X-AUTH-TOKEN: <YOUR_ACCESS_TOKEN>"
+```
 
 ## 🔒 Security
 
